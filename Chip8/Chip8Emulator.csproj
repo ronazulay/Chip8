@@ -12,6 +12,9 @@
     <None Update="roms\ibm_logo.ch8">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="roms\invaders.ch8">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="roms\particle_demo.ch8">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
