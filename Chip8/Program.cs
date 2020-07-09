@@ -7,7 +7,13 @@ namespace Chip8
     {
         static void Main(string[] args)
         {
-            var vm = Vm.NewVm("test.rom");
+            if (args.Length != 1)
+            {
+                Console.WriteLine("./Chip8Emulator.exe <Path to ROM>");
+                return;
+            }
+
+            var vm = Vm.NewVm(args[0]);
 
             while(true)
             {
