@@ -1,5 +1,9 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
+using OpenToolkit.Mathematics;
+using OpenToolkit.Windowing.Desktop;
+using OpenToolkit.Windowing.Common;
 
 namespace Chip8
 {
@@ -7,18 +11,22 @@ namespace Chip8
     {
         static void Main(string[] args)
         {
-            if (args.Length != 1)
+            var gameSettings = new GameWindowSettings
             {
-                Console.WriteLine("./Chip8Emulator.exe <Path to ROM>");
-                return;
-            }
+                RenderFrequency = 60,
+                UpdateFrequency = 60
+            };
 
-            var vm = Vm.NewVm(args[0]);
-
-            while(true)
+            var nativeSettings = new NativeWindowSettings
             {
-                vm.EmulateCycle();
-            }
+                Size = new Vector2i(1024, 512),
+                Profile = ContextProfile.Compatability,
+                Title = "Chip8"
+            };
+
+            var window = new Window(gameSettings, nativeSettings);
+            window.VSync = VSyncMode.On;
+            window.Run();            
         }
     }
 }

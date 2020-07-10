@@ -3,22 +3,28 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="roms\chip8_logo.ch8">
+    <PackageReference Include="OpenTK" Version="4.0.0-pre9.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Roms\chip8_logo.ch8">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="roms\ibm_logo.ch8">
+    <None Update="Roms\ibm_logo.ch8">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="roms\invaders.ch8">
+    <None Update="Roms\invaders.ch8">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="roms\particle_demo.ch8">
+    <None Update="Roms\particle_demo.ch8">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="roms\pong.ch8">
+    <None Update="Roms\pong.ch8">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
