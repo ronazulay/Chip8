@@ -36,6 +36,9 @@ M     = Print memory contents to console
 I used these resources for help and inspiration:
 
 http://en.wikipedia.org/wiki/CHIP-8
+
 http://devernay.free.fr/hacks/chip8/C8TECH10.HTM
+
 https://github.com/bradford-hamilton/chippy/blob/master/internal/chip8/chip8.go
+
 https://github.com/BluestormDNA/ProjectPSX
