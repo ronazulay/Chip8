@@ -46,9 +46,7 @@ namespace Chip8
 
         const ushort RomStart = 0x200;
 
-        private Window Window;
-
-        public static Vm NewVm(Window window, string rom)
+        public static Vm NewVm(string rom)
         {
             var vm = new Vm
             {
@@ -62,8 +60,6 @@ namespace Chip8
                 Gfx     = new byte[64 * 32],
                 V       = new byte[16],
                 Keys    = new bool[16],
-
-                Window = window,
                 
                 SoundTimer = 0,
                 DelayTimer = 0
@@ -224,10 +220,7 @@ namespace Chip8
         private void UpdateTimers()
         {
             if (DelayTimer > 0) DelayTimer--;
-            if (SoundTimer > 0)
-            {
-                SoundTimer--;
-            }
+            if (SoundTimer > 0) SoundTimer--;
         }
 
         public void DebugRegisters()

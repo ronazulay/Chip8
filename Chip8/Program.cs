@@ -21,7 +21,7 @@ namespace Chip8
             {
                 Size = new Vector2i(1024, 512),
                 Profile = ContextProfile.Compatability,
-                Title = "Chip8"
+                Title = "Chip8 Emulator"
             };
 
             var window = new Window(gameSettings, nativeSettings);
