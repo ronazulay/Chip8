@@ -43,7 +43,7 @@ namespace Chip8
         private void Window_FileDrop(FileDropEventArgs obj)
         {
             string rom = obj.FileNames[0];
-            vm = Vm.NewVm(rom);
+            vm = Vm.NewVm(this, rom);
         }
 
         protected override void OnLoad()

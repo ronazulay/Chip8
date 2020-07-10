@@ -46,7 +46,9 @@ namespace Chip8
 
         const ushort RomStart = 0x200;
 
-        public static Vm NewVm(string rom)
+        private Window Window;
+
+        public static Vm NewVm(Window window, string rom)
         {
             var vm = new Vm
             {
@@ -60,6 +62,8 @@ namespace Chip8
                 Gfx     = new byte[64 * 32],
                 V       = new byte[16],
                 Keys    = new bool[16],
+
+                Window = window,
                 
                 SoundTimer = 0,
                 DelayTimer = 0
@@ -220,13 +224,10 @@ namespace Chip8
         private void UpdateTimers()
         {
             if (DelayTimer > 0) DelayTimer--;
-            if (SoundTimer > 0) SoundTimer--;
-        }
-
-        private void MissingInstruction()
-        {
-            Console.WriteLine($"warning: Instruction not implemented {OpCode:X4}");
-            PC += 2;
+            if (SoundTimer > 0)
+            {
+                SoundTimer--;
+            }
         }
 
         public void DebugRegisters()
@@ -569,7 +570,7 @@ namespace Chip8
         private void OpCodeFX33(byte X)
         {
             Memory[I] = (byte)(V[X] / 100);
-            Memory[I + 1] = (byte) ((V[X] / 10) % 10);
+            Memory[I + 1] = (byte)((V[X] / 10) % 10);
             Memory[I + 2] = (byte)((V[X] / 100) % 10);
 
             PC += 2;

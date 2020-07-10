@@ -14,7 +14,7 @@ namespace Chip8
             var gameSettings = new GameWindowSettings
             {
                 RenderFrequency = 60,
-                UpdateFrequency = 60
+                UpdateFrequency = 600
             };
 
             var nativeSettings = new NativeWindowSettings
@@ -25,7 +25,6 @@ namespace Chip8
             };
 
             var window = new Window(gameSettings, nativeSettings);
-            window.VSync = VSyncMode.On;
             window.Run();            
         }
     }
