@@ -107,6 +107,7 @@ namespace Chip8
             base.OnRenderFrame(args);
 
             RenderScreen();
+            vm?.UpdateTimers();
         }
 
         protected override void OnResize(ResizeEventArgs e)

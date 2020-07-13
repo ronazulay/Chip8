@@ -213,11 +213,9 @@ namespace Chip8
                 default:
                     throw new InvalidOperationException($"error: Invalid OpCode: {OpCode:X4} @ PC = 0x{PC:X3}");
             }
-
-            UpdateTimers();
         }
 
-        private void UpdateTimers()
+        public void UpdateTimers()
         {
             if (DelayTimer > 0) DelayTimer--;
             if (SoundTimer > 0) SoundTimer--;
