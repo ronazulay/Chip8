@@ -13,6 +13,8 @@ namespace Chip8
 {
     class Window : GameWindow
     {
+        bool running = true;
+
         private Dictionary<Key, byte> KeyboardMap = new Dictionary<Key, byte>
         {
             { Key.Number0, 0x0 },
@@ -73,9 +75,11 @@ namespace Chip8
             if (KeyboardMap.TryGetValue(e.Key, out byte value))
             {
                 vm?.KeyDown(value);
-            }
+                return;
 
-            switch(e.Key)
+            }  
+            
+            switch (e.Key)
             {
                 case Key.Escape:
                     Environment.Exit(0);
@@ -89,9 +93,14 @@ namespace Chip8
                 case Key.R:
                     vm?.DebugRegisters();
                     break;
+                case Key.P:
+                    running = !running;
+                    break;
+                case Key.S:
+                    vm?.Step();
+                    break;
                 default:
                     break;
-
             }
         }
 
@@ -99,7 +108,10 @@ namespace Chip8
         {
             base.OnUpdateFrame(args);
 
-            vm?.EmulateCycle();
+            if (running)
+            {
+                vm?.EmulateCycle();
+            }
         }
 
         protected override void OnRenderFrame(FrameEventArgs args)

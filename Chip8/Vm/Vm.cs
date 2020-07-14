@@ -95,6 +95,12 @@ namespace Chip8
         {
             return Gfx;
         }
+
+        public void Step()
+        {
+            EmulateCycle();
+            DebugRegisters();
+        }
         
         public void EmulateCycle()
         {
