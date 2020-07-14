@@ -35,6 +35,8 @@ P     = Pause / Play execution
 
 S     = Single step
 
+O     = Toggle Console
+
 
 ## References
 I used these resources for help and inspiration:
