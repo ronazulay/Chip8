@@ -8,12 +8,23 @@ using OpenToolkit.Windowing.Common.Input;
 using OpenToolkit.Graphics.OpenGL;
 using OpenToolkit.Mathematics;
 using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace Chip8
 {
     class Window : GameWindow
     {
-        bool running = true;
+        // https://stackoverflow.com/questions/3571627/show-hide-the-console-window-of-a-c-sharp-console-application
+        [DllImport("kernel32.dll")]
+        static extern IntPtr GetConsoleWindow();
+
+        [DllImport("user32.dll")]
+        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+        const int SW_HIDE = 0;
+        const int SW_SHOW = 5;
+
+        bool running, console;
 
         private Dictionary<Key, byte> KeyboardMap = new Dictionary<Key, byte>
         {
@@ -46,6 +57,8 @@ namespace Chip8
         {
             string rom = obj.FileNames[0];
             vm = Vm.NewVm(rom);
+
+            running = true;
         }
 
         protected override void OnLoad()
@@ -55,7 +68,9 @@ namespace Chip8
             GL.ClearColor(Color.Black);
             GL.Color3(Color.White);
             GL.Ortho(0, 64, 32, 0, -1, 1);
-            
+
+            var handle = GetConsoleWindow();
+            ShowWindow(handle, SW_HIDE);
         }
 
         protected override void OnKeyUp(KeyboardKeyEventArgs e)
@@ -97,6 +112,9 @@ namespace Chip8
                     break;
                 case Key.S:
                     vm?.Step();
+                    break;
+                case Key.O:
+                    ToggleConsole();
                     break;
                 default:
                     break;
@@ -149,6 +167,21 @@ namespace Chip8
             GL.End();
 
             SwapBuffers();
+        }
+
+        private void ToggleConsole()
+        {
+            var handle = GetConsoleWindow();
+            if (console)
+            {
+                ShowWindow(handle, SW_HIDE);
+                console = false;
+            }
+            else
+            {
+                ShowWindow(handle, SW_SHOW);
+                console = true;
+            }
         }
     }
 }

@@ -27,7 +27,7 @@ P     = Pause / Play execution
 
 S     = Single step
 
-If started from console:
+O     = Show / hide console
 
 R     = Dump registers to console
 
