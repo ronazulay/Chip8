@@ -535,9 +535,10 @@ namespace Chip8
 
         private void OpCodeFX33(byte X)
         {
-            Memory[I] = (byte)(V[X] / 100);
-            Memory[I + 1] = (byte)((V[X] / 10) % 10);
-            Memory[I + 2] = (byte)((V[X] / 100) % 10);
+            var number = V[X];
+            Memory[I] = (byte) (number / 100);
+            Memory[I + 1] = (byte)((number / 10) % 10);
+            Memory[I + 2] = (byte)((number % 100) % 10);
         }
 
         private void OpCode9XY0(byte X, byte Y)
