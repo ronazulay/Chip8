@@ -451,7 +451,6 @@ namespace Chip8
         {
             var random = new Random();
             V[X] = (byte)(random.Next(0, 0xFF) & NN);
-
         }
 
         private void OpCodeFX1E(byte X)
@@ -477,17 +476,14 @@ namespace Chip8
 
         private void OpCodeFX0A(byte X)
         {
-            bool keyPressed = false;
-
-            while (!keyPressed)
+            while (true)
             {
                 for (byte i = 0; i < 0xF; i++)
                 {
                     if (Keys[i])
                     {
                         V[X] = i;
-                        keyPressed = true;
-                        break;
+                        return;
                     }
                 }
             }

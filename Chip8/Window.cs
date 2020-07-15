@@ -68,6 +68,9 @@ namespace Chip8
             GL.ClearColor(Color.Black);
             GL.Color3(Color.White);
             GL.Ortho(0, 64, 32, 0, -1, 1);
+            GL.Clear(ClearBufferMask.ColorBufferBit);
+
+            SwapBuffers();
 
             var handle = GetConsoleWindow();
             ShowWindow(handle, SW_HIDE);
@@ -135,8 +138,11 @@ namespace Chip8
         {
             base.OnRenderFrame(args);
 
-            RenderScreen();
-            vm?.UpdateTimers();
+            if (running)
+            {
+                RenderScreen();
+                vm?.UpdateTimers();
+            }
         }
 
         protected override void OnResize(ResizeEventArgs e)
@@ -148,11 +154,11 @@ namespace Chip8
 
         private void RenderScreen()
         {
-            GL.Clear(ClearBufferMask.ColorBufferBit);
-
             var buffer = vm?.GetScreenBuffer();
             if (buffer != null)
             {
+                GL.Clear(ClearBufferMask.ColorBufferBit);
+                
                 for (int y = 0; y < 32; y++)
                 {
                     for (int x = 0; x < 64; x++)
@@ -163,10 +169,8 @@ namespace Chip8
                         }
                     }
                 }
+                SwapBuffers();
             }
-            GL.End();
-
-            SwapBuffers();
         }
 
         private void ToggleConsole()
