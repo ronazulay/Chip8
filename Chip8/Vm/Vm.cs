@@ -105,6 +105,7 @@ namespace Chip8
         public void EmulateCycle()
         {
             OpCode = (ushort)(Memory[PC] << 8| Memory[PC + 1]);
+			PC += 2;
 
             ushort NNN  = (ushort)(OpCode & 0x0FFF);
             byte NN     = (byte)(OpCode & 0x00FF);
@@ -291,7 +292,6 @@ namespace Chip8
         private void OpCode00E0()
         {
             Gfx = new byte[64 * 32];
-            PC += 2;
         }
 
         private void OpCode00EE()
@@ -301,20 +301,18 @@ namespace Chip8
 
         private void OpCode2NNN(ushort NNN)
         {
-            Stack[++SP] = (ushort)(PC + 2);
+            Stack[++SP] = PC;
             PC = NNN;
         }
 
         private void OpCodeANNN(ushort NNN)
         {
             I = NNN;
-            PC += 2;
         }
 
         private void OpCode6XNN(ushort X, ushort NN)
         {
             V[X] = (byte)NN;
-            PC += 2;
         }
 
         // Source: https://stackoverflow.com/questions/17346592/how-does-chip-8-graphics-rendered-on-screen
@@ -355,14 +353,11 @@ namespace Chip8
                     sprite <<= 0x1;
                 }
             }
-
-            PC += 2;
         }
 
         private void OpCode7XNN(byte X, byte NN)
         {
             V[X] += NN;
-            PC += 2;
         }
 
         private void OpCode0NNN(ushort NNN)
@@ -372,50 +367,43 @@ namespace Chip8
 
         private void OpCode3XNN(byte X, ushort NN)
         {
-            if (V[X] == NN)
+            if (V[X] == NN) {
                 PC += 2;
-
-            PC += 2;
+			}
         }
 
         private void OpCode4XNN(byte X, ushort NN)
         {
-            if (V[X] != NN)
+            if (V[X] != NN) {
                 PC += 2;
-
-            PC += 2;
+			}
         }
 
         private void OpCode5XNN(byte X, byte Y)
         {
-            if (V[X] == V[Y])
+            if (V[X] == V[Y]) {
                 PC += 2;
-
-            PC += 2;
+			}
         }
 
         private void OpCode8XY0(byte X, byte Y)
         {
             V[X] = V[Y];
-            PC += 2;
         }
 
         private void OpCode8XY1(byte X, byte Y)
         {
             V[X] = (byte)(V[X] | V[Y]);
-            PC += 2;
         }
 
         private void OpCode8XY2(byte X, byte Y)
         {
             V[X] = (byte)(V[X] & V[Y]);
-            PC += 2;
         }
 
         private void OpCode8XY3(byte X, byte Y)
         {
             V[X] = (byte)(V[X] ^ V[Y]);
-            PC += 2;
         }
 
         private void OpCode8XY4(byte X, byte Y)
@@ -423,8 +411,6 @@ namespace Chip8
             int sum = V[X] + V[Y];
             V[X] = (byte)(sum & 0xFF);
             V[0xF] = (byte)(sum > 0xFF ? 1 : 0);
-
-            PC += 2;
         }
 
         private void OpCode8XY5(byte X, byte Y)
@@ -432,16 +418,12 @@ namespace Chip8
             int diff = V[X] - V[Y];
             V[X] = (byte)(diff & 0xFF);
             V[0xF] = (byte)(V[Y] > V[X] ? 1 : 0);
-
-            PC += 2;
         }
 
         private void OpCode8XY6(byte X, byte Y)
         {
             V[0xF] = (byte)(V[X] & 0x1);
             V[X] >>= 0x1;
-
-            PC += 2;
         }
 
         private void OpCode8XY7(byte X, byte Y)
@@ -449,16 +431,12 @@ namespace Chip8
             int diff = V[Y] - V[X];
             V[X] = (byte)(diff & 0xFF);
             V[0xF] = (byte)(diff > 0 ? 1 : 0);
-
-            PC += 2;
         }
 
         private void OpCode8XYE(byte X, byte Y)
         {
             V[0xF] = (byte)((V[X] & 0x80) >> 7);
             V[X] <<= 0x1;
-
-            PC += 2;
         }
 
         private void OpCodeBNNN(ushort NNN)
@@ -471,14 +449,11 @@ namespace Chip8
             var random = new Random();
             V[X] = (byte)(random.Next(0, 0xFF) & NN);
 
-            PC += 2;
-
         }
 
         private void OpCodeFX1E(byte X)
         {
             I += V[X];
-            PC += 2;
         }
 
         private void OpCodeFX65(byte X)
@@ -487,8 +462,6 @@ namespace Chip8
             {
                 V[i] = Memory[I + i];
             }
-
-            PC += 2;
         }
 
         private void OpCodeFX55(byte X)
@@ -497,8 +470,6 @@ namespace Chip8
             {
                 Memory[I + i] = V[i];
             }
-
-            PC += 2;
         }
 
         private void OpCodeFX0A(byte X)
@@ -517,8 +488,6 @@ namespace Chip8
                     }
                 }
             }
-            
-            PC += 2;
         }
 
         private void OpCodeEX9E(byte X)
@@ -527,7 +496,6 @@ namespace Chip8
             {
                 PC += 2;
             }
-            PC += 2;
         }
 
         private void OpCodeEXA1(byte X)
@@ -536,31 +504,26 @@ namespace Chip8
             {
                 PC += 2;
             }
-            PC += 2;
         }
 
         private void OpCodeFX15(byte X)
         {
             DelayTimer = V[X];
-            PC += 2;
         }
 
         private void OpCodeFX18(byte X)
         {
             SoundTimer = V[X];
-            PC += 2;
         }
 
         private void OpCodeFX07(byte X)
         {
             V[X] = DelayTimer;
-            PC += 2;
         }
 
         private void OpCodeFX29(byte X)
         {
             I = (byte)(V[X] * 5);
-            PC += 2;
         }
 
         private void OpCodeFX33(byte X)
@@ -568,8 +531,6 @@ namespace Chip8
             Memory[I] = (byte)(V[X] / 100);
             Memory[I + 1] = (byte)((V[X] / 10) % 10);
             Memory[I + 2] = (byte)((V[X] / 100) % 10);
-
-            PC += 2;
         }
         #endregion
     }

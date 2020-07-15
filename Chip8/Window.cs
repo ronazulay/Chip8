@@ -91,7 +91,6 @@ namespace Chip8
             {
                 vm?.KeyDown(value);
                 return;
-
             }  
             
             switch (e.Key)
