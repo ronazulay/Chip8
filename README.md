@@ -23,18 +23,17 @@ Keyboard shortcuts:
 
 [Esc] = Exit
 
-If running as console application:
+P     = Pause / Play execution
+
+S     = Single step
+
+If started from console:
 
 R     = Dump registers to console
 
 G     = Dump screen contents to console
 
 M     = Print memory contents to console
-
-P     = Pause / Play execution
-
-S     = Single step
-
 
 ## References
 I used these resources for help and inspiration:
