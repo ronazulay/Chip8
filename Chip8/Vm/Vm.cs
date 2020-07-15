@@ -70,6 +70,14 @@ namespace Chip8
             return vm;
         }
 
+        public void Reset()
+        {
+            PC  = RomStart;
+            I   = 0;
+            SP  = 0;
+            Gfx = new byte[64 * 32];
+        }
+
         private void LoadFonts()
         {
             Fonts.CopyTo(Memory, 0x0);

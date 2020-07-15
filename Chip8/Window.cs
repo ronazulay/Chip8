@@ -119,6 +119,9 @@ namespace Chip8
                 case Key.O:
                     ToggleConsole();
                     break;
+                case Key.BackSpace:
+                    vm?.Reset();
+                    break;
                 default:
                     break;
             }
@@ -138,9 +141,9 @@ namespace Chip8
         {
             base.OnRenderFrame(args);
 
+            RenderScreen();
             if (running)
             {
-                RenderScreen();
                 vm?.UpdateTimers();
             }
         }

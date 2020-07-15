@@ -23,6 +23,8 @@ Keyboard shortcuts:
 
 [Esc] = Exit
 
+Backspace = Reset
+
 P     = Pause / Play execution
 
 S     = Single step
