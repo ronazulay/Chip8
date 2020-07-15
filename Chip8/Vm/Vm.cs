@@ -280,7 +280,6 @@ namespace Chip8
             }
             output.AppendLine(" ----------------------------------------------------------------");
 
-            Console.Clear();
             Console.WriteLine(output);
         }
 
