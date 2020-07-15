@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Timers;
 
 namespace Chip8
@@ -46,7 +47,9 @@ namespace Chip8
 
         const ushort RomStart = 0x200;
 
-        public static Vm NewVm(string rom)
+        private Window Window;
+
+        public static Vm NewVm(Window window, string rom)
         {
             var vm = new Vm
             {
@@ -62,7 +65,9 @@ namespace Chip8
                 Keys    = new bool[16],
                 
                 SoundTimer = 0,
-                DelayTimer = 0
+                DelayTimer = 0,
+
+                Window  = window
             };
             vm.LoadFonts();
             vm.LoadRom(rom);
@@ -494,6 +499,8 @@ namespace Chip8
                         return;
                     }
                 }
+
+                Window.ProcessEvents();
             }
         }
 
