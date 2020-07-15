@@ -172,6 +172,9 @@ namespace Chip8
                 case 0x8000 when (OpCode & 0x000F) == 0xE:
                     OpCode8XYE(X, Y);
                     break;
+                case 0x9000:
+                    OpCode9XY0(X, Y);
+                    break;
                 case 0xA000:
                     OpCodeANNN(NNN);
                     break;
@@ -531,6 +534,14 @@ namespace Chip8
             Memory[I] = (byte)(V[X] / 100);
             Memory[I + 1] = (byte)((V[X] / 10) % 10);
             Memory[I + 2] = (byte)((V[X] / 100) % 10);
+        }
+
+        private void OpCode9XY0(byte X, byte Y)
+        {
+            if(V[X] != V[Y])
+            {
+                PC += 2;
+            }
         }
         #endregion
     }
