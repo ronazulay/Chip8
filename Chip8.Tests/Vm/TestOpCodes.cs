@@ -24,7 +24,7 @@ namespace Chip8.Tests
         }
 
         [Test]
-        public void Test_OpCode00EE_ShouldReturnToPC0x202()
+        public void Test_OpCode00EE_ShouldSetPCTo0x202()
         {
             var vm = Vm.NewVm(new MockWindow(), new byte[] {
                 0x22, 0x04,  // 0x2204 - Call subroutine at 0x204
@@ -36,6 +36,17 @@ namespace Chip8.Tests
             vm.EmulateCycle();
 
             Assert.AreEqual(vm.PC, 0x202);
+        }
+
+        public void Test_OpCode1NNN_ShouldSetPCTo0x123()
+        {
+            var vm = Vm.NewVm(new MockWindow(), new byte[] {
+                0x11, 0x23,  // 0x1123 - Jump to address 0x123
+            });
+            vm.EmulateCycle();
+            vm.EmulateCycle();
+
+            Assert.AreEqual(vm.PC, 0x123);
         }
     }
 }
