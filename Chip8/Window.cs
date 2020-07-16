@@ -9,6 +9,7 @@ using OpenToolkit.Graphics.OpenGL;
 using OpenToolkit.Mathematics;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace Chip8
 {
@@ -17,6 +18,8 @@ namespace Chip8
     {
         public void Render();
         public void ProcessEvents();
+
+        public void Beep();
     }
 
     class Window : GameWindow, IWindow
@@ -204,6 +207,14 @@ namespace Chip8
                 ShowWindow(handle, SW_SHOW);
                 console = true;
             }
+        }
+
+        public void Beep()
+        {
+            Task.Run(() =>
+            {
+                Console.Beep(440, 1000);
+            });
         }
     }
 }

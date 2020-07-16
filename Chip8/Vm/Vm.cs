@@ -241,7 +241,11 @@ namespace Chip8
         public void UpdateTimers()
         {
             if (DelayTimer > 0) DelayTimer--;
-            if (SoundTimer > 0) SoundTimer--;
+            if (SoundTimer > 0)
+            {
+                Window.Beep();
+                SoundTimer--;
+            }
         }
 
         public void DebugRegisters()
