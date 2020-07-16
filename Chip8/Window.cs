@@ -106,7 +106,7 @@ namespace Chip8
             switch (e.Key)
             {
                 case Key.Escape:
-                    Environment.Exit(0);
+                    Close();
                     break;
                 case Key.G:
                     vm?.DebugGraphics();
@@ -182,6 +182,13 @@ namespace Chip8
                 }
                 SwapBuffers();
             }
+        }
+
+        protected override void OnClosed()
+        {
+            base.OnClosed();
+
+            Environment.Exit(0);
         }
 
         private void ToggleConsole()
