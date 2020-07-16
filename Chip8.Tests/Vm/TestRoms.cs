@@ -279,7 +279,7 @@ namespace Chip8.Tests
                 vm.EmulateCycle();
             }
 
-            CollectionAssert.AreEqual(vm.GetScreenBuffer(), ok);
+            CollectionAssert.AreEqual(vm.Gfx, ok);
         }
     }
 }

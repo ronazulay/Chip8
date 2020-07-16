@@ -31,17 +31,18 @@ namespace Chip8
               0xF0, 0x80, 0xF0, 0x80, 0x80  // F
         };
 
-        private ushort OpCode;
-        private ushort I;
-        private ushort PC;
-        private ushort[] Stack;
-        private ushort SP;
+        public ushort OpCode { get; set; }
+        public ushort I { get; set; }
+        public ushort PC { get; set; }
+        public ushort[] Stack { get; set; }
+        public ushort SP { get; set; }
+
         private byte DelayTimer;
         private byte SoundTimer;
 
-        private byte[] V;
-        private byte[] Memory;
-        private byte[] Gfx;
+        public byte[] V { get; set; }
+        public byte[] Memory { get; set; }
+        public byte[] Gfx { get; set; }
 
         private bool[] Keys;
 
@@ -102,11 +103,6 @@ namespace Chip8
         public void KeyDown(byte key)
         {
             Keys[key] = true;
-        }
-
-        public byte[] GetScreenBuffer()
-        {
-            return Gfx;
         }
 
         public void Step()

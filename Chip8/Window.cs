@@ -168,7 +168,7 @@ namespace Chip8
 
         public void Render()
         {
-            var buffer = vm?.GetScreenBuffer();
+            var buffer = vm?.Gfx;
             if (buffer != null)
             {
                 GL.Clear(ClearBufferMask.ColorBufferBit);
