@@ -34,7 +34,7 @@ namespace Chip8
         const int SW_HIDE = 0;
         const int SW_SHOW = 5;
 
-        bool running, console;
+        bool running, console, playingSound;
 
         private Dictionary<Key, byte> KeyboardMap = new Dictionary<Key, byte>
         {
@@ -213,7 +213,12 @@ namespace Chip8
         {
             Task.Run(() =>
             {
-                Console.Beep(440, 1000);
+                if (!playingSound)
+                {
+                    playingSound = true;
+                    Console.Beep(440, 500);
+                    playingSound = false;
+                }
             });
         }
     }
