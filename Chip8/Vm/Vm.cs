@@ -50,7 +50,7 @@ namespace Chip8
 
         private IWindow Window;
 
-        public static Vm NewVm(IWindow window, string rom)
+        public static Vm NewVm(IWindow window, byte[] rom)
         {
             var vm = new Vm
             {
@@ -76,6 +76,12 @@ namespace Chip8
             return vm;
         }
 
+        public static Vm NewVm(IWindow window, string rom)
+        {
+            var bytes = File.ReadAllBytes(rom);            
+            return NewVm(window, bytes);
+        }
+
         public void Reset()
         {
             PC  = RomStart;
@@ -89,10 +95,9 @@ namespace Chip8
             Fonts.CopyTo(Memory, 0x0);
         }
 
-        private void LoadRom(string rom)
+        private void LoadRom(byte[] rom)
         {
-            var bytes = File.ReadAllBytes(rom);
-            bytes.CopyTo(Memory, RomStart);
+            rom.CopyTo(Memory, RomStart);
         }
 
         public void KeyUp(byte key)
