@@ -47,7 +47,7 @@ namespace Chip8
 
         const ushort RomStart = 0x200;
 
-        private Window Window;
+        private IWindow Window;
 
         public static Vm NewVm(Window window, string rom)
         {
@@ -337,7 +337,7 @@ namespace Chip8
             // Initialize the collision detection as no collision detected (yet).
             V[0xF] = 0;
 
-            // Draw up to N lines on the screen.
+            // Draw N lines on the screen.
             for (int line = 0; line < N; line++)
             {
                 // y is the starting line Y + current line. If y is larger than the total width of the screen then wrap around (this is the modulo operation).
@@ -369,6 +369,8 @@ namespace Chip8
                     sprite <<= 0x1;
                 }
             }
+
+            Window.Render();
         }
 
         private void OpCode7XNN(byte X, byte NN)

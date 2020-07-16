@@ -12,7 +12,14 @@ using System.Runtime.InteropServices;
 
 namespace Chip8
 {
-    class Window : GameWindow
+    // These methods gets called by the vm.
+    interface IWindow
+    {
+        public void Render();
+        public void ProcessEvents();
+    }
+
+    class Window : GameWindow, IWindow
     {
         // https://stackoverflow.com/questions/3571627/show-hide-the-console-window-of-a-c-sharp-console-application
         [DllImport("kernel32.dll")]
@@ -137,11 +144,12 @@ namespace Chip8
             }
         }
 
+        // This method does not render the screen, it only updates the 60hz timers. Render() is called from the VM when screen has been updated.
         protected override void OnRenderFrame(FrameEventArgs args)
         {
             base.OnRenderFrame(args);
 
-            RenderScreen();
+            // TODO: Timers should be properly updated when single stepping.
             if (running)
             {
                 vm?.UpdateTimers();
@@ -155,7 +163,7 @@ namespace Chip8
             GL.Viewport(0, 0, e.Width, e.Height);
         }
 
-        private void RenderScreen()
+        public void Render()
         {
             var buffer = vm?.GetScreenBuffer();
             if (buffer != null)
