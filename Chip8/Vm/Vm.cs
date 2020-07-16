@@ -116,6 +116,14 @@ namespace Chip8
             DebugRegisters();
         }
         
+        public void EmulateCycles(int times)
+        {
+            foreach(var _ in Enumerable.Range(0, times))
+            {
+                EmulateCycle();
+            }
+        }
+
         public void EmulateCycle()
         {
             OpCode = (ushort)(Memory[PC] << 8| Memory[PC + 1]);
