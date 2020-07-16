@@ -9,7 +9,7 @@ using System.Timers;
 
 namespace Chip8
 {
-    class Vm
+    public class Vm
     {
         private byte[] Fonts =
         {
@@ -49,7 +49,7 @@ namespace Chip8
 
         private IWindow Window;
 
-        public static Vm NewVm(Window window, string rom)
+        public static Vm NewVm(IWindow window, string rom)
         {
             var vm = new Vm
             {

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace Chip8
 {
     // These methods gets called by the vm.
-    interface IWindow
+    public interface IWindow
     {
         public void Render();
         public void ProcessEvents();
@@ -22,7 +22,7 @@ namespace Chip8
         public void Beep();
     }
 
-    class Window : GameWindow, IWindow
+    public class Window : GameWindow, IWindow
     {
         // https://stackoverflow.com/questions/3571627/show-hide-the-console-window-of-a-c-sharp-console-application
         [DllImport("kernel32.dll")]
