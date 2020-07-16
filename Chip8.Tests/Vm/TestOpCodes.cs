@@ -110,7 +110,7 @@ namespace Chip8.Tests
         }
 
         [Test]
-        public void Test_OpCode8XY5_ShouldNotSetVFFlag1()
+        public void Test_OpCode8XY5_ShouldSetVFFlag1()
         {
             var vm = Vm.NewVm(null, new byte[] {
                 0x60, 0xF1,  // Set VF to 0x1.

@@ -11,7 +11,7 @@ namespace Chip8.Tests
         }
 
         [Test]
-        public void Runs_test_opcode_Successfully()
+        public void Test_RunTestRom_ShouldReturnAllOKScreen()
         {
             byte[] expected =
             {
@@ -274,10 +274,7 @@ namespace Chip8.Tests
             };
 
             var vm = Vm.NewVm(null, @"Roms\test_opcode.ch8");
-            foreach(var _ in Enumerable.Range(0, 512))
-            {
-                vm.EmulateCycle();
-            }
+            vm.EmulateCycles(512);
 
             CollectionAssert.AreEqual(expected, vm.Gfx);
         }
