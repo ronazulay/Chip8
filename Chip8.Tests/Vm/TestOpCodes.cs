@@ -102,7 +102,7 @@ namespace Chip8.Tests
             var vm = Vm.NewVm(null, new byte[] {
                 0x60, 0x05,  // Set V0 to 0x5.
                 0x61, 0x06,  // Set V1 to 0x6.
-                0x80, 0x17,  // Should set VF flag to 0 (borrow)
+                0x80, 0x15,  // Should set VF flag to 0 (borrow)
             });
             vm.EmulateCycles(3);
 
@@ -115,8 +115,8 @@ namespace Chip8.Tests
             var vm = Vm.NewVm(null, new byte[] {
                 0x60, 0xF1,  // Set VF to 0x1.
                 0x60, 0x05,  // Set V0 to 0x6.
-                0x61, 0x06,  // Set V1 to 0x4.
-                0x80, 0x17,  // Should set VF flag to 1 (no borrow)
+                0x61, 0x04,  // Set V1 to 0x4.
+                0x80, 0x15,  // Should set VF flag to 1 (no borrow)
             });
             vm.EmulateCycles(4);
 

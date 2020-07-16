@@ -439,16 +439,22 @@ namespace Chip8
 
         private void OpCode8XY4(byte X, byte Y)
         {
-            int sum = V[X] + V[Y];
-            V[X] = (byte)(sum & 0xFF);
-            V[0xF] = (byte)(sum > 0xFF ? 1 : 0);
+            if (V[Y] > (0xFF - V[X]))
+                V[0xF] = 1;
+            else
+                V[0xF] = 0;
+
+            V[X] += V[Y];
         }
 
         private void OpCode8XY5(byte X, byte Y)
         {
-            int diff = V[X] - V[Y];
-            V[X] = (byte)(diff & 0xFF);
-            V[0xF] = (byte)(V[Y] > V[X] ? 1 : 0);
+            if(V[Y] > V[X])
+                V[0xF] = 0;
+            else
+                V[0xF] = 1;
+
+            V[X] -= V[Y];
         }
 
         private void OpCode8XY6(byte X, byte Y)
