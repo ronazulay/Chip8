@@ -13,7 +13,7 @@ namespace Chip8.Tests
         [Test]
         public void Runs_test_opcode_Successfully()
         {
-            byte[] ok =
+            byte[] expected =
             {
                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -279,7 +279,7 @@ namespace Chip8.Tests
                 vm.EmulateCycle();
             }
 
-            CollectionAssert.AreEqual(vm.Gfx, ok);
+            CollectionAssert.AreEqual(expected, vm.Gfx);
         }
     }
 }

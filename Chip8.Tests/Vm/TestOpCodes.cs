@@ -19,7 +19,7 @@ namespace Chip8.Tests
             vm.EmulateCycle();
 
             foreach(var pixel in vm.Gfx) {
-                Assert.AreEqual(pixel, 0);
+                Assert.AreEqual(0, pixel);
             }
         }
 
@@ -34,7 +34,7 @@ namespace Chip8.Tests
             });
             vm.EmulateCycles(2);
 
-            Assert.AreEqual(vm.PC, 0x202);
+            Assert.AreEqual(0x202, vm.PC);
         }
 
         [Test]
@@ -45,7 +45,7 @@ namespace Chip8.Tests
             });
             vm.EmulateCycle();
 
-            Assert.AreEqual(vm.PC, 0x123);
+            Assert.AreEqual(0x123, vm.PC);
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace Chip8.Tests
             });
             vm.EmulateCycles(2);
 
-            Assert.AreEqual(vm.PC, 0x206);
+            Assert.AreEqual(0x206, vm.PC);
         }
 
         [Test]
@@ -69,7 +69,7 @@ namespace Chip8.Tests
             });
             vm.EmulateCycles(2);
 
-            Assert.AreEqual(vm.PC, 0x206);
+            Assert.AreEqual(0x206, vm.PC);
         }
 
         [Test]
@@ -82,7 +82,7 @@ namespace Chip8.Tests
             });
             vm.EmulateCycles(3);
 
-            Assert.AreEqual(vm.PC, 0x208);
+            Assert.AreEqual(0x208, vm.PC);
         }
 
         [Test]
@@ -93,7 +93,34 @@ namespace Chip8.Tests
             });
             vm.EmulateCycle();
 
-            Assert.AreEqual(vm.V[0], 0xAA);
+            Assert.AreEqual(0xAA, vm.V[0]);
+        }
+
+        [Test]
+        public void Test_OpCode8XY5_ShouldSetVFFlag0()
+        {
+            var vm = Vm.NewVm(null, new byte[] {
+                0x60, 0x05,  // Set V0 to 0x5.
+                0x61, 0x06,  // Set V1 to 0x6.
+                0x80, 0x17,  // Should set VF flag to 0 (borrow)
+            });
+            vm.EmulateCycles(3);
+
+            Assert.AreEqual(0x0, vm.V[0xF]);
+        }
+
+        [Test]
+        public void Test_OpCode8XY5_ShouldNotSetVFFlag1()
+        {
+            var vm = Vm.NewVm(null, new byte[] {
+                0x60, 0xF1,  // Set VF to 0x1.
+                0x60, 0x05,  // Set V0 to 0x6.
+                0x61, 0x06,  // Set V1 to 0x4.
+                0x80, 0x17,  // Should set VF flag to 1 (no borrow)
+            });
+            vm.EmulateCycles(4);
+
+            Assert.AreEqual(0x1, vm.V[0xF]);
         }
     }
 }
