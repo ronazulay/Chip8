@@ -273,7 +273,7 @@ namespace Chip8.Tests
                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
             };
 
-            var vm = Vm.NewVm(new MockWindow(), @"Roms\test_opcode.ch8");
+            var vm = Vm.NewVm(null, @"Roms\test_opcode.ch8");
             foreach(var _ in Enumerable.Range(0, 512))
             {
                 vm.EmulateCycle();

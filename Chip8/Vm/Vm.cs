@@ -252,7 +252,7 @@ namespace Chip8
             if (DelayTimer > 0) DelayTimer--;
             if (SoundTimer > 0)
             {
-                Window.Beep();
+                Window?.Beep();
                 SoundTimer--;
             }
         }
@@ -383,7 +383,7 @@ namespace Chip8
                 }
             }
 
-            Window.Render();
+            Window?.Render();
         }
 
         private void OpCode7XNN(byte X, byte NN)
@@ -515,7 +515,7 @@ namespace Chip8
                     }
                 }
 
-                Window.ProcessEvents();
+                Window?.ProcessEvents();
             }
         }
 
