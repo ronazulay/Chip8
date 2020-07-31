@@ -18,7 +18,6 @@ namespace Chip8
     {
         public void Render();
         public void ProcessEvents();
-
         public void Beep();
     }
 

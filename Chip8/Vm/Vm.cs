@@ -269,6 +269,9 @@ namespace Chip8
                 output.AppendLine($"V{register:X}              0x{V[register]:X2}");
             }
 
+            output.AppendLine($"DelayTimer      {DelayTimer}");
+            output.AppendLine($"SoundTimer      {SoundTimer}");
+
             Console.WriteLine(output);
         }
 
@@ -297,9 +300,17 @@ namespace Chip8
         {
             var output = new StringBuilder();
 
-            for(int i = 0; i < Gfx.Length; i += 8)
+            for(int i = 0; i < Gfx.Length; i += 64)
             {
-                output.AppendFormat("0x{0:X2}, 0x{0:X2}, 0x{0:X2}, 0x{0:X2}, 0x{0:X2}, 0x{0:X2}, 0x{0:X2}, 0x{0:X2}", Gfx[i], Gfx[i + 1], Gfx[i + 2], Gfx[i + 3], Gfx[i + 4], Gfx[i + 5], Gfx[i + 6], Gfx[i + 7]);
+                output.Append($"0x{i:X3}:");
+                output.Append($" 0x{Gfx[i]:X2}");
+                output.Append($" 0x{Gfx[i + 1]:X2}");
+                output.Append($" 0x{Gfx[i + 2]:X2}");
+                output.Append($" 0x{Gfx[i + 3]:X2}");
+                output.Append($" 0x{Gfx[i + 4]:X2}");
+                output.Append($" 0x{Gfx[i + 5]:X2}");
+                output.Append($" 0x{Gfx[i + 6]:X2}");
+                output.Append($" 0x{Gfx[i + 7]:X2}");
                 output.AppendLine();
             }
 
