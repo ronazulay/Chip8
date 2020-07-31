@@ -146,18 +146,6 @@ namespace Chip8
             }
         }
 
-        // This method does not render the screen, it only updates the 60hz timers. Render() is called from the VM when screen should be redrawn.
-        protected override void OnRenderFrame(FrameEventArgs args)
-        {
-            base.OnRenderFrame(args);
-
-            // TODO: Timers should be properly updated when single stepping.
-            if (running)
-            {
-                vm?.UpdateTimers();
-            }
-        }
-
         protected override void OnResize(ResizeEventArgs e)
         {
             base.OnResize(e);

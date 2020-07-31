@@ -45,6 +45,7 @@ namespace Chip8
         public byte[] Gfx { get; set; }
 
         private bool[] Keys;
+        private uint Counter;
 
         const ushort RomStart = 0x200;
 
@@ -67,6 +68,7 @@ namespace Chip8
                 
                 SoundTimer = 0,
                 DelayTimer = 0,
+                Counter    = 0,
 
                 Window  = window
             };
@@ -245,9 +247,17 @@ namespace Chip8
                 default:
                     throw new InvalidOperationException($"error: Invalid OpCode: {OpCode:X4} @ PC = 0x{PC:X3}");
             }
+
+            // The update frequency is 600 Hz. Timers should be updated at 60 Hz, so update timers every 10th cycle.
+            if((Counter % 10) == 0)
+            {
+                UpdateTimers();
+            }
+
+            Counter++;
         }
 
-        public void UpdateTimers()
+        private void UpdateTimers()
         {
             if (DelayTimer > 0) DelayTimer--;
             if (SoundTimer > 0)

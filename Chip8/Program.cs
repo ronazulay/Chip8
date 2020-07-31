@@ -13,7 +13,6 @@ namespace Chip8
         {
             var gameSettings = new GameWindowSettings
             {
-                RenderFrequency = 60,
                 UpdateFrequency = 600
             };
 

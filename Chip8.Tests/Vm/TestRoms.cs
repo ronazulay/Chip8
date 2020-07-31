@@ -269,8 +269,7 @@ namespace Chip8.Tests
             };
 
             var vm = Vm.NewVm(null, @"Roms\c8_test.c8");
-            vm.EmulateCycles(10000);
-            vm.DebugGraphics();
+            vm.EmulateCycles(512);
 
             CollectionAssert.AreEqual(expected, vm.Gfx);
         }
