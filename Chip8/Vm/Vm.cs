@@ -297,6 +297,12 @@ namespace Chip8
         {
             var output = new StringBuilder();
 
+            for(int i = 0; i < Gfx.Length; i += 8)
+            {
+                output.AppendFormat("0x{0:X2}, 0x{0:X2}, 0x{0:X2}, 0x{0:X2}, 0x{0:X2}, 0x{0:X2}, 0x{0:X2}, 0x{0:X2}", Gfx[i], Gfx[i + 1], Gfx[i + 2], Gfx[i + 3], Gfx[i + 4], Gfx[i + 5], Gfx[i + 6], Gfx[i + 7]);
+                output.AppendLine();
+            }
+
             output.AppendLine(" ----------------------------------------------------------------");
             for (int i = 0; i < 32; i++)
             {
