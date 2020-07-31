@@ -33,6 +33,9 @@
     <None Update="Roms\pong.ch8">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Roms\pong_1_player.ch8">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Roms\test_opcode.ch8">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
