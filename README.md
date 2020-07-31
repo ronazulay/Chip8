@@ -28,8 +28,6 @@ Keyboard shortcuts:
 
 <kbd>S</kbd>     = Single step
 
-<kbd>O</kbd>     = Show / hide console
-
 <kbd>R</kbd>     = Dump registers to console
 
 <kbd>G</kbd>     = Dump screen contents to console

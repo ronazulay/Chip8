@@ -23,17 +23,7 @@ namespace Chip8
 
     public class Window : GameWindow, IWindow
     {
-        // https://stackoverflow.com/questions/3571627/show-hide-the-console-window-of-a-c-sharp-console-application
-        [DllImport("kernel32.dll")]
-        static extern IntPtr GetConsoleWindow();
-
-        [DllImport("user32.dll")]
-        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-
-        const int SW_HIDE = 0;
-        const int SW_SHOW = 5;
-
-        bool running, console, playingSound;
+        bool running, playingSound;
 
         private Dictionary<Key, byte> KeyboardMap = new Dictionary<Key, byte>
         {
@@ -80,9 +70,6 @@ namespace Chip8
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
             SwapBuffers();
-
-            var handle = GetConsoleWindow();
-            ShowWindow(handle, SW_HIDE);
         }
 
         protected override void OnKeyUp(KeyboardKeyEventArgs e)
@@ -124,9 +111,6 @@ namespace Chip8
                     break;
                 case Key.S:
                     vm?.Step();
-                    break;
-                case Key.O:
-                    ToggleConsole();
                     break;
                 case Key.BackSpace:
                     vm?.Reset();
@@ -179,21 +163,6 @@ namespace Chip8
             base.OnClosed();
 
             Environment.Exit(0);
-        }
-
-        private void ToggleConsole()
-        {
-            var handle = GetConsoleWindow();
-            if (console)
-            {
-                ShowWindow(handle, SW_HIDE);
-                console = false;
-            }
-            else
-            {
-                ShowWindow(handle, SW_SHOW);
-                console = true;
-            }
         }
 
         public void Beep()
