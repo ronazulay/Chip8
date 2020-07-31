@@ -5,11 +5,6 @@ namespace Chip8.Tests
 {
     public class TestOpCodes
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
         public void Test_OpCode00E0_ShouldClearScreen()
         {
@@ -18,9 +13,8 @@ namespace Chip8.Tests
             });
             vm.EmulateCycle();
 
-            foreach(var pixel in vm.Gfx) {
-                Assert.AreEqual(0, pixel);
-            }
+            var empty = new byte[64 * 32];
+            CollectionAssert.AreEqual(empty, vm.Gfx);
         }
 
         [Test]

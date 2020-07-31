@@ -5,11 +5,6 @@ namespace Chip8.Tests
 {
     public class TestRoms
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
         public void Test_RunTestRom_ShouldReturnAllOKScreen()
         {
