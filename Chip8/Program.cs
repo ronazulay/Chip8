@@ -24,7 +24,7 @@ namespace Chip8
             };
 
             var window = new Window(gameSettings, nativeSettings);
-            window.Run();            
+            window.Run();
         }
     }
 }

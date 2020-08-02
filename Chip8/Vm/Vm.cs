@@ -129,7 +129,7 @@ namespace Chip8
         public void EmulateCycle()
         {
             OpCode = (ushort)(Memory[PC] << 8| Memory[PC + 1]);
-			PC += 2;
+            PC += 2;
 
             ushort NNN  = (ushort)(OpCode & 0x0FFF);
             byte NN     = (byte)(OpCode & 0x00FF);
@@ -427,21 +427,21 @@ namespace Chip8
         {
             if (V[X] == NN) {
                 PC += 2;
-			}
+            }
         }
 
         private void OpCode4XNN(byte X, ushort NN)
         {
             if (V[X] != NN) {
                 PC += 2;
-			}
+            }
         }
 
         private void OpCode5XNN(byte X, byte Y)
         {
             if (V[X] == V[Y]) {
                 PC += 2;
-			}
+            }
         }
 
         private void OpCode8XY0(byte X, byte Y)
