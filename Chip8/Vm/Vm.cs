@@ -420,7 +420,7 @@ namespace Chip8
 
         private void OpCode0NNN(ushort NNN)
         {
-            throw new NotImplementedException($"error: {OpCode:4X} has not been implemented.");
+            throw new NotImplementedException($"error: {OpCode:X4} has not been implemented.");
         }
 
         private void OpCode3XNN(byte X, ushort NN)
