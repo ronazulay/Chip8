@@ -111,12 +111,6 @@ namespace Chip8
         {
             Keys[key] = true;
         }
-
-        public void Step()
-        {
-            EmulateCycle();
-            DebugRegisters();
-        }
         
         public void EmulateCycles(int times)
         {

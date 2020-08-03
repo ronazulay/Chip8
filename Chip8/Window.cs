@@ -110,7 +110,8 @@ namespace Chip8
                     running = !running;
                     break;
                 case Key.S:
-                    vm?.Step();
+                    vm?.EmulateCycle();
+                    vm?.DebugRegisters();
                     break;
                 case Key.BackSpace:
                     vm?.Reset();
